@@ -13,23 +13,29 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="module" defer src="game.js"></script>
     <script>setInterval(function () {
-        $(".animate").animate({color: "red"}, "slow");
-        $(".animate").animate({color: "black"}, "slow");
+        $(".animate").animate({color: "red"});
+        $(".animate").animate({color: "black"});
     }, 100);</script>
+
 </head>
 <body>
+<audio id="player" loop>
+    <source src='music.mp3' type='audio/mpeg'/>
+</audio>
+
 <div class="main_container">
     <div class="header">
-        <div id="logo"><img src="images/snek.png" alt="snake"
-                            style="transform: rotate(90deg); width: 50px; height:50px"> DUMMY
+        <div id="logo">
+            <img src="images/snek.png" alt="snake" style="transform: rotate(90deg); width: 50px; height:50px"> DUMMY
             SNEK
         </div>
     </div>
+
     <div id="menu" style="display: block">
         <div class="btn-group">
             <button id="switchToGame">START GAME</button>
             <button id="switchToOption">OPTIONS</button>
-            <button id="switchToScoreBoard">SCORE BOARD</button>
+            <button id="switchToScoreBoard">ABOUT GAME</button>
             <button id="switchToCredits">CREDITS</button>
         </div>
     </div>
@@ -37,16 +43,23 @@
     <div id="options" style="display: none">
         <h3 class="options">CHOOSE OPTIONS:</h3>
         <ul>
-            <ul>
-                <li>Set snake speed</li>
-                <li><input type="range" min="1" max="10" value="7" class="slider" id="myRange"></li>
-                <li style="font-size: 20px">Value: <span id="demo"></span></li>
-                <br>
+            <li>Set snake speed</li>
+            <li><input type="range" min="1" max="10" value="7" class="slider" id="myRange"></li>
+            <li style="font-size: 20px">Value: <span id="demo"></span></li>
+            <br>
 
-                <li>Choose level (1-3)</li>
-                <li><input type="range" min="1" max="3" value="1" class="slider" id="chosenLevel"></li>
-                <li style="font-size: 20px">Value: <span id="level"></span></li>
-            </ul>
+            <li>Choose level (1-3)</li>
+            <li><input type="range" min="1" max="3" value="1" class="slider" id="chosenLevel"></li>
+            <li style="font-size: 20px">Value: <span id="level"></span></li>
+
+
+            <li>Music sound</li>
+            <li>
+                <label class="switch">
+                    <input type="checkbox" id="music">
+                    <span class="littleslider"></span>
+                </label>
+            </li>
         </ul>
 
         <div class="btn-group">
@@ -54,8 +67,18 @@
         </div>
     </div>
 
-    <div id="scoreBoard" style="display: none">
-        <h3 class="topScores">TOP SCORES:</h3>
+    <div id="aboutBoard" style="display: none">
+        <h3 class="about">About:</h3>
+        <p><b>The main goal of the game is to gain the highest score by eating apples.</b></p>
+
+        <ul><b>Snake controle enabled by:</b>
+            <li style="font-size: 25px">Using arrows -> <i>up, down, right letf</i></li>
+            <li style="font-size: 25px">Using keyboard WSAD -> <i>w, a, s, d</i></li>
+        </ul>
+
+        <ul><b>The logic of scoring points:</b>
+            <li style="font-size: 25px">score = snake speed * level</li>
+        </ul>
 
         <div class="btn-group">
             <button class="backButton">BACK TO MENU</button>
@@ -68,15 +91,17 @@
         <ul>
             <li><strong>1. Sebastian CHOMENTOWSKI </strong></li>
             <li>chomentowski.s@gmail.com</li>
-            <br>
+        </ul>
 
+        <ul>
             <li><strong>2. Wiktoria Rajba</strong></li>
             <li>wiktoria.rajba391@gmail.com</li>
 
-            <div class="btn-group">
-                <button class="backButton">BACK TO MENU</button>
-            </div>
         </ul>
+
+        <div class="btn-group">
+            <button class="backButton">BACK TO MENU</button>
+        </div>
     </div>
 
 
@@ -86,7 +111,7 @@
         <div class="snake_body" alt="snake_body" style="grid-column-start: 9; grid-row-start: 10;"></div>
         <img id="apple" src="images/japko.png" alt="apple">
         <div class="player_score">
-            <p id="score" style="color: black">Score:<span id="myScore"> 0</span></p>
+            <p style="color: black">Score:<span id="myScore"> 0</span></p>
         </div>
 
         <div class="obstacle" style="display: none"></div>

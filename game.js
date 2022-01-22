@@ -1,7 +1,7 @@
 import * as util from './util.js';
 
 const swallowSound = new Audio("polykSound.mp3");
-
+const myMusic = new Audio('music.mp3');
 let speed = 400;
 let scoreMultiplier = 7
 let levelMultiplier = 1
@@ -30,17 +30,17 @@ function initGame() {
 
     intervalId = setInterval(moveSnake, speed);
     window.addEventListener('keydown', (edge) => {
-        console.log(speed);
-        if (edge.key === "d") {
+
+        if (edge.key === "d" || edge.key === "ArrowRight") {
             futureDirection = "d"
         }
-        if (edge.key === "a") {
+        if (edge.key === "a" || edge.key === "ArrowLeft") {
             futureDirection = "a"
         }
-        if (edge.key === "w") {
+        if (edge.key === "w" || edge.key === "ArrowUp") {
             futureDirection = "w"
         }
-        if (edge.key === "s") {
+        if (edge.key === "s" || edge.key === "ArrowDown") {
             futureDirection = "s"
         }
 
@@ -131,7 +131,7 @@ function endgame() {
     finallScore.innerHTML = score;
     levelOutput.innerHTML = level;
     sessionStorage.setItem("input", score.toString())
-    console.log(sessionStorage.getItem("input"))
+
 }
 
 function checkIfMoveRightIsValid(x, y) {
@@ -175,7 +175,7 @@ function checkIfObstacle(x, y) {
 
     } else if (level == 3) {
         for (let i = 0; i < 22; i++) {
-            console.log(i)
+
             if (obstacleCoordinates[i]['x'] == x && obstacleCoordinates[i]['y'] == y) {
                 return true;
             }
@@ -195,24 +195,24 @@ function displayAppleOnBoard(snakeY, snakeX) {
         swallowSound.play();
         score += 1 * scoreMultiplier * levelMultiplier;
         myScore();
-              
+
         let coordinates = isAppleCoordinatesValid()
-            apple.style.gridColumnStart = coordinates[1];
-            apple.style.gridRowStart = coordinates[0];
-            createNewSnakeBodyElement();
-        }
+        apple.style.gridColumnStart = coordinates[1];
+        apple.style.gridRowStart = coordinates[0];
+        createNewSnakeBodyElement();
+    }
 
 }
 
 function isAppleCoordinatesValid() {
     let count = 1;
-    while (count == 1){
-    let x = util.getRandomInt(1, 20);
-    let y = util.getRandomInt(1, 20);
-    if (checkPossitionForApple(x, y)) {
-        return [x, y];
-    }
-    
+    while (count == 1) {
+        let x = util.getRandomInt(1, 20);
+        let y = util.getRandomInt(1, 20);
+        if (checkPossitionForApple(x, y)) {
+            return [x, y];
+        }
+
     }
 }
 
@@ -233,7 +233,7 @@ function checkPossitionForApple(x, y) {
     if (level == 3) {
         for (let i = 0; i < 22; i++) {
             if (obstacleElements[i].style.gridColumnStart == y && obstacleElements[i].style.gridRowStart == x) {
-               return false;
+                return false;
             }
         }
         if (snake.style.gridColumnStart == y && snake.gridRowStart == x) {
@@ -279,7 +279,7 @@ switchToOptions.onclick = function switchBetweenMenuAndOptions() {
 
 let switchToScoreBoard = document.getElementById("switchToScoreBoard");
 switchToScoreBoard.onclick = function switchBetweenMenuAndScoreBoard() {
-    scoreBoard.style.display = "block";
+    aboutBoard.style.display = "block";
 
     menu.style.display = "none";
 
@@ -302,7 +302,7 @@ for (let i = 0; i < backToMainMenuButtons.length; i++) {
 
         options.style.display = "none";
         credits.style.display = "none";
-        scoreBoard.style.display = "none";
+        aboutBoard.style.display = "none";
     }
 }
 
@@ -371,3 +371,18 @@ sliderLevel.oninput = function () {
     }
     levelMultiplier = this.value;
 }
+
+
+let music = document.getElementById("music");
+let audio = document.getElementById("player");
+audio.volume = 0.2;
+
+music.addEventListener("click", function(){
+  if(audio.paused){
+    audio.play();
+    music.innerHTML = "&#10074;&#10074;";
+  } else {
+    audio.pause();
+    music.innerHTML = "&#9658";
+  }
+});

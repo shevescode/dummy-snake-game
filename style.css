@@ -18,7 +18,7 @@ body {
     height: 100px;
 }
 
-#menu, #options, #scoreBoard, #credits, #gameOver {
+#menu, #options, #aboutBoard, #credits, #gameOver {
     position: relative;
     background-color: #7CB15F;
     width: 800px;
@@ -72,25 +72,37 @@ h1 {
     position: absolute;
     font-family: 'Permanent Marker', cursive;
 }
+
 /*OPTIONS,SCORES,CREDITS*/
-.authors,.topScores,.options {
-    padding: 30px 0 40px 0;
+.authors, .about, .options {
+    padding: 20px 0 40px 0;
     font-size: 60px;
     text-align: center;
 }
 
+p {
+    font-size: 35px;
+    text-align: center;
+    padding-bottom: 25px;
+    color: #F9F6F0;
 
-
+}
 
 ul {
     color: #F9F6F0;
     list-style: none;
-    font-size: 30px;
+    font-size: 35px;
     text-align: center;
+    padding-bottom: 35px;
+
 }
 
-li  {
-    padding: 2px;
+li {
+    padding: 3px;
+}
+
+i {
+    font-size: 20px;
 }
 
 /*BUTTONS MODIFICATIONS*/
@@ -185,4 +197,53 @@ li  {
 #logo:hover {
     color: #e4d1ae;
     cursor: pointer;
+}
+
+
+/*LITTLE SLIDER FOR MUSIC ON/OF*/
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.littleslider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.littleslider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .littleslider {
+    background-color: #416E25;
+}
+
+input:checked + .littleslider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
 }
